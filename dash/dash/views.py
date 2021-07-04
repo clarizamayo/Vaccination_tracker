@@ -3,7 +3,7 @@ from django.shortcuts import HttpResponse
 from .read_data import create_connect, read_vacc, read_total
 from .bar_charts import top_states, bottom_states
 from .map import state_map
-from .line_chart import line_chart_1, line_chart_2,scatter_plot, scatter_plot_2
+from .line_chart import line_chart_1, line_chart_2,scatter_plot
 from bokeh.embed import components
 from bokeh.layouts import row,column, gridplot
 from bokeh.io import curdoc
@@ -26,13 +26,13 @@ al_perc_vacc = line_chart_2(state = 'Mississippi')
 ver_num_vacc = line_chart_1(state = 'Vermont')
 ver_perc_vacc = line_chart_2(state = 'Vermont')
 scatter = scatter_plot()
-scatter_2 = scatter_plot_2()
+# scatter_2 = scatter_plot_2()
 state_list = df2['location'].tolist()
 
 
 def vac_table(request):
     grid = gridplot([al_num_vacc, al_perc_vacc, ver_num_vacc, ver_perc_vacc], ncols=2)
-    bar_row = gridplot([top,bottom,scatter, scatter_2], ncols=2)
+    bar_row = gridplot([top,bottom,scatter,None], ncols=2)
     script, divs = components((bar_row,vacc_map, grid))    
     json_records = df2.to_json(orient='records')
     data = json.loads(json_records)

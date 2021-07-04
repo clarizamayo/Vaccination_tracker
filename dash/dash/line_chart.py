@@ -63,9 +63,9 @@ def scatter_plot():
     ('Percentage', '@perc_daily_vacc_pop'),
     ('Doses','@total_doses_thousand')])
 
-    p = figure(title = "State Percentage and Doses distribution")
+    p = figure(title = "State Total Vaccination Percentage and Doses Needed")
     p.xaxis.axis_label = 'Percentage of People Fully Vaccinated (%)'
-    p.yaxis.axis_label = 'total Doses Needed (thousand)'
+    p.yaxis.axis_label = 'Total Doses Needed (thousand)'
     color_mapper = LinearColorMapper(palette, low=0, high =80000)
     color_bar = ColorBar(color_mapper=color_mapper)
     color_map= {'field': 'total_doses_thousand', 'transform': color_mapper}
@@ -74,29 +74,29 @@ def scatter_plot():
 
     return p
 
-def scatter_plot_2():
-    total = read_total()
-    total = total.sort_values(by='perc_daily_vacc_pop', ascending=False)
-    total['total_vaccinations_thousand']= total['daily_vaccinations']//1000
-    source = ColumnDataSource(total)
-    colors = [x for x in Magma[4]]*13
-    total['fill_color'] = colors
-    print(total.head())
-    palette =colors
-    hover = HoverTool(tooltips=[("Location", "@location"),
-    ('Percentage', '@perc_daily_vacc_pop'),
-    ('Doses','@total_vaccinations_thousand')])
+# def scatter_plot_2():
+#     total = read_total()
+#     total = total.sort_values(by='perc_daily_vacc_pop', ascending=False)
+#     total['state_population_thousands']= total['state_population']//1000
+#     source = ColumnDataSource(total)
+#     colors = [x for x in Magma[4]]*13
+#     total['fill_color'] = colors
+#     print(total.head())
+#     palette =colors
+#     hover = HoverTool(tooltips=[("Location", "@location"),
+#     ('Percentage', '@perc_daily_vacc_pop'),
+#     ('Population','@state_population_thousands')])
 
-    p = figure(title = "State Percentage and Doses distribution")
-    p.xaxis.axis_label = 'Percentage of People Fully Vaccinated (%)'
-    p.yaxis.axis_label = 'total Doses Needed (thousand)'
-    color_mapper = LinearColorMapper(palette, low=0, high =80000)
-    color_bar = ColorBar(color_mapper=color_mapper)
-    color_map= {'field': 'total_vaccinations_thousand', 'transform': color_mapper}
-    p.circle('perc_daily_vacc_pop', 'total_vaccinations_thousand', source=source,fill_color=color_map, fill_alpha=0.6, size=10)
-    p.add_tools(hover)
+#     p = figure(title = "State Population and Doses distribution")
+#     p.xaxis.axis_label = 'Percentage of People Fully Vaccinated (%)'
+#     p.yaxis.axis_label = 'Population (thousand)'
+#     color_mapper = LinearColorMapper(palette, low=0, high =80000)
+#     color_bar = ColorBar(color_mapper=color_mapper)
+#     color_map= {'field': 'state_population_thousands', 'transform': color_mapper}
+#     p.circle('perc_daily_vacc_pop', 'state_population_thousands', source=source,fill_color=color_map, fill_alpha=0.6, size=10)
+#     p.add_tools(hover)
 
-    return p
+#     return p
 
 
 
