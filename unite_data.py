@@ -10,6 +10,7 @@ from pop_data import state_pop, state_coor, pop_table
 engine = create_engine('sqlite:///dash/project_2.db', echo=False)
 links = ["berkayalan/vaccinations-in-united-states"]
 
+
 def clean_vacc():  
     vacc = get_vac_data()
     vacc = clean_data(vacc)
